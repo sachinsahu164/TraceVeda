@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TraceVeda - Ayurvedic Herb Traceability & Supply Chain</title>
+  <style>
+    /* Basic Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      line-height: 1.6;
+      background-color: #f8f9fa;
+    }
+
+    /* Header & Navbar Styling */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background-color: #2c5530;
+      padding: 0;
+    }
+
+    nav {
+      background: #2c5530;
+      padding: 12px 0;
+      border-radius: 0;
+    }
+
+    .nav-container {
+      max-width: 100%;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 40px;
+    }
+
+    .logo-section {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo-circle {
+      width: 40px;
+      height: 40px;
+      background-color: #ffffff;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      font-weight: bold;
+      color: #2c5530;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 0;
+      margin: 0;
+    }
+
+    nav ul li {
+      margin: 0;
+    }
+
+    nav ul li a {
+      color: #ffffff;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 16px;
+      padding: 15px 25px;
+      display: block;
+      transition: all 0.3s ease;
+      border-radius: 0;
+    }
+
+    nav ul li a:hover {
+      background-color: rgba(255,255,255,0.1);
+      color: #ffffff;
+    }
+
+    /* Hero Section */
+    .hero {
+      background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=1200&h=600&fit=crop') no-repeat center center/cover;
+      height: 500px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      text-align: center;
+      position: relative;
+    }
+
+    .hero-content {
+      max-width: 800px;
+      padding: 0 20px;
+    }
+
+    .hero h1 {
+      font-size: 3.2rem;
+      font-weight: bold;
+      margin-bottom: 20px;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+      line-height: 1.2;
+    }
+
+    .hero h2 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      opacity: 0.95;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+    }
+
+    /* Info Section */
+    .info-section {
+      padding: 60px 20px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: 1fr 300px;
+      gap: 40px;
+      align-items: start;
+    }
+
+    .info-text h3 {
+      color: #2c5530;
+      font-size: 24px;
+      font-weight: bold;
+      margin-bottom: 20px;
+      line-height: 1.3;
+    }
+
+    .info-text p {
+      color: #333;
+      font-size: 14px;
+      line-height: 1.8;
+      margin-bottom: 15px;
+      text-align: justify;
+    }
+
+    .info-image {
+      height: 250px;
+      background: url('https://images.unsplash.com/photo-1574263867128-a3d5c1b1deaa?w=300&h=250&fit=crop') center/cover;
+      border-radius: 10px;
+    }
+
+    /* What We Do Section */
+    .what-we-do {
+      background-color: #ffffff;
+      padding: 70px 40px;
+      text-align: center;
+    }
+
+    .what-we-do h2 {
+      color: #333;
+      font-size: 22px;
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+
+    .what-we-do h1 {
+      color: #2c5530;
+      font-size: 36px;
+      font-weight: bold;
+      margin-bottom: 50px;
+      line-height: 1.2;
+    }
+
+    .stakeholders-grid {
+      max-width: 800px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 30px;
+    }
+
+    .stakeholder-card {
+      background: #ffffff;
+      border: 2px solid #e0e0e0;
+      border-radius: 15px;
+      padding: 30px 20px;
+      text-align: center;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+
+    .stakeholder-card:hover {
+      border-color: #2c5530;
+      transform: translateY(-5px);
+      box-shadow: 0 5px 15px rgba(44,85,48,0.2);
+    }
+
+    /* STAKEHOLDER IMAGES - Replace image filenames here */
+    .stakeholder-icon {
+      width: 80px;
+      height: 80px;
+      margin: 0 auto 20px;
+      border-radius: 15px;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      border: 2px solid #ddd;
+    }
+
+    /* Replace these image paths with your actual image files */
+    .farmer-icon { 
+      background-image: url('farmer.png'); 
+      /* Fallback color if image not found */
+      background-color: #8B4513;
+    }
+    .manufacturer-icon { 
+      background-image: url('manufacturer.png'); 
+      background-color: #FF6B35;
+    }
+    .testing-icon { 
+      background-image: url('laboratory.png'); 
+      background-color: #4A90E2;
+    }
+    .distributor-icon { 
+      background-image: url('distributor.png'); 
+      background-color: #2ECC71;
+    }
+    .retailer-icon { 
+      background-image: url('retailer.png'); 
+      background-color: #E74C3C;
+    }
+    .customer-icon { 
+      background-image: url('coustomer.png'); 
+      background-color: #9B59B6;
+    }
+
+    .stakeholder-card h4 {
+      color: #333;
+      font-size: 20px;
+      font-weight: bold;
+      margin: 0;
+    }
+
+    /* External Stakeholders Section */
+    .stakeholders-detail {
+      padding: 60px 20px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .stakeholders-detail h2 {
+      color: #333;
+      font-size: 28px;
+      font-weight: bold;
+      margin-bottom: 40px;
+    }
+
+    .stakeholder-item {
+      display: grid;
+      grid-template-columns: 120px 1fr;
+      gap: 30px;
+      margin-bottom: 40px;
+      background: #ffffff;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+    .stakeholder-visual {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    /* DETAIL SECTION IMAGES - Replace image filenames here */
+    .stakeholder-image {
+      width: 80px;
+      height: 80px;
+      border-radius: 10px;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      margin-bottom: 10px;
+    }
+
+    /* Replace these image paths with your actual image files */
+    .contract-farmers { 
+      background-image: url('farmer.png'); 
+      background-color: #8B4513; 
+    }
+    .manufacturers { 
+      background-image: url('manufacturer.png'); 
+      background-color: #FF6B35; 
+    }
+    .testing-labs { 
+      background-image: url('laboratory.png'); 
+      background-color: #4A90E2; 
+    }
+    .distributors { 
+      background-image: url('distributor.png'); 
+      background-color: #2ECC71; 
+    }
+    .retailers { 
+      background-image: url('retailer.png'); 
+      background-color: #E74C3C; 
+    }
+    .consumers { 
+      background-image: url('coustomer.png'); 
+      background-color: #9B59B6; 
+    }
+
+    .stakeholder-content h3 {
+      color: #dc3545;
+      font-size: 18px;
+      font-weight: bold;
+      margin-bottom: 15px;
+    }
+
+    .stakeholder-content p {
+      color: #333;
+      font-size: 14px;
+      line-height: 1.6;
+      margin-bottom: 12px;
+    }
+
+    .stakeholder-content ul {
+      list-style-type: disc;
+      padding-left: 20px;
+      color: #555;
+    }
+
+    .stakeholder-content ul li {
+      font-size: 13px;
+      line-height: 1.5;
+      margin-bottom: 6px;
+    }
+
+    /* Case Study Section */
+    .case-study {
+      background-color: #f8f9fa;
+      padding: 70px 40px;
+      text-align: center;
+    }
+
+    .case-study h2 {
+      color: #333;
+      font-size: 36px;
+      font-weight: bold;
+      margin-bottom: 40px;
+    }
+
+    .case-study-placeholder {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 30px;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .case-study-item {
+      height: 200px;
+      background-color: #e9ecef;
+      border-radius: 15px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: #6c757d;
+      font-size: 16px;
+      font-weight: 600;
+      text-align: center;
+      padding: 30px 40px;
+      transition: all 0.3s ease;
+      width: 100%;
+    }
+
+    .case-study-item h3 {
+      font-size: 20px;
+      color: #2c5530;
+      margin-bottom: 15px;
+      font-weight: bold;
+    }
+
+    .case-study-item p {
+      font-size: 14px;
+      color: #666;
+      margin: 0;
+    }
+
+    .case-study-item:hover {
+      background-color: #dee2e6;
+      transform: translateY(-5px);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+
+    /* Footer */
+    footer {
+      background: #d4c4b8;
+      padding: 40px 20px 20px;
+      border-radius: 15px 15px 0 0;
+      margin-top: 0;
+    }
+
+    .footer-container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .footer-main {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .footer-text {
+      flex: 1;
+    }
+
+    .footer-text p {
+      color: #2c5530;
+      font-size: 16px;
+      font-weight: bold;
+      margin-bottom: 8px;
+      line-height: 1.4;
+    }
+
+    .footer-logo {
+      width: 60px;
+      height: 60px;
+      background-color: #ffffff;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      font-weight: bold;
+      color: #2c5530;
+      margin-left: 20px;
+    }
+
+    .footer-bottom {
+      border-top: 1px solid #b8a898;
+      padding-top: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .footer-contact {
+      color: #2c5530;
+      font-size: 16px;
+      font-weight: 600;
+    }
+
+    .social-links {
+      display: flex;
+      gap: 10px;
+    }
+
+    .social-link {
+      width: 35px;
+      height: 35px;
+      border-radius: 5px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      color: white;
+      font-weight: bold;
+      font-size: 12px;
+    }
+
+    .linkedin { background-color: #0077B5; }
+    .whatsapp { background-color: #25D366; }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .nav-container {
+        flex-direction: column;
+        gap: 15px;
+      }
+
+      nav ul {
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      nav ul li a {
+        padding: 8px 12px;
+        font-size: 12px;
+      }
+
+      .hero h1 {
+        font-size: 2rem;
+      }
+
+      .hero h2 {
+        font-size: 1rem;
+      }
+
+      .info-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+      }
+
+      .stakeholders-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+      }
+
+      .stakeholder-item {
+        grid-template-columns: 100px 1fr;
+        gap: 20px;
+        padding: 20px;
+      }
+
+      .stakeholder-image {
+        width: 60px;
+        height: 60px;
+        font-size: 24px;
+      }
+
+      .footer-main {
+        flex-direction: column;
+        gap: 20px;
+        text-align: center;
+      }
+
+      .footer-bottom {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+      }
+      
+      .case-study-placeholder {
+        grid-template-columns: 1fr;
+        gap: 20px;
+        max-width: 100%;
+      }
+      
+      .case-study-item {
+        height: 180px;
+        font-size: 14px;
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header & Navbar -->
+  <header>
+    <nav>
+      <div class="nav-container">
+        <div class="logo-section">
+          <div class="logo-circle">T</div>
+        </div>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="farmer.html">Farmers</a></li>
+          <li><a href="laboratory.html">Labs</a></li>
+          <li><a href="manufacturer.html">Manufacturers</a></li>
+          <li><a href="distributor.html">Distributors</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="login.html">Login</a></li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1>Blockchain-Based Transparent & Ethical Management Supply Chain</h1>
+      <h2>Platform to Consumer's TraceEvery Ayurvedic Blockchain Technology</h2>
+    </div>
+  </section>
+
+  <!-- Info Section -->
+  <section class="info-section">
+    <div class="info-grid">
+      <div class="info-text">
+        <h3>TraceVeda – Ayurvedic Herb Traceability & Supply Chain Management Software</h3>
+        <p>TraceVeda is an advanced blockchain-based platform specifically designed for the Ayurvedic herbs industry. Our platform addresses critical challenges in the supply chain by providing complete transparency and traceability from farm to consumer.</p>
+        <p>Our solution integrates advanced blockchain technology with sophisticated IoT sensors to real-time monitoring of temperature, humidity, and other environmental conditions throughout the supply chain process.</p>
+        <p>Whether you're a farmer, manufacturer, distributor, retailer, or lab, TraceVeda connects all stakeholders in the Ayurvedic herbs ecosystem to ensure the highest standards of herbal processing, testing, and quality management.</p>
+      </div>
+      <div class="info-image"></div>
+    </div>
+  </section>
+
+  <!-- What We Do Section -->
+  <section class="what-we-do">
+    <h2>What we do</h2>
+    <h1>One Platform, Complete Transparency for Ayurvedic Herbs</h1>
+    
+    <div class="stakeholders-grid">
+      <!-- IMAGE USAGE: Replace emojis with image divs -->
+      <div class="stakeholder-card" onclick="scrollToSection('farmer-detail')">
+        <div class="stakeholder-icon farmer-icon"></div>
+        <h4>Farmer</h4>
+      </div>
+      <div class="stakeholder-card" onclick="scrollToSection('manufacturer-detail')">
+        <div class="stakeholder-icon manufacturer-icon"></div>
+        <h4>Manufacturer</h4>
+      </div>
+      <div class="stakeholder-card" onclick="scrollToSection('testing-detail')">
+        <div class="stakeholder-icon testing-icon"></div>
+        <h4>Testing</h4>
+      </div>
+      <div class="stakeholder-card" onclick="scrollToSection('distributor-detail')">
+        <div class="stakeholder-icon distributor-icon"></div>
+        <h4>Distributor</h4>
+      </div>
+      <div class="stakeholder-card" onclick="scrollToSection('retailer-detail')">
+        <div class="stakeholder-icon retailer-icon"></div>
+        <h4>Retailer</h4>
+      </div>
+      <div class="stakeholder-card" onclick="scrollToSection('consumer-detail')">
+        <div class="stakeholder-icon customer-icon"></div>
+        <h4>Customer</h4>
+      </div>
+    </div>
+  </section>
+
+  <!-- External Stakeholders Section -->
+  <section class="stakeholders-detail">
+    <h2>Our External Stakeholders</h2>
+    
+    <!-- IMAGE USAGE: Replace emojis with image divs -->
+    <div class="stakeholder-item" id="farmer-detail">
+      <div class="stakeholder-visual">
+        <div class="stakeholder-image contract-farmers"></div>
+      </div>
+      <div class="stakeholder-content">
+        <h3>Contract Farmers</h3>
+        <p>Begin your farming journey with TraceVeda's mobile app – designed exclusively for farmers. Our app provides comprehensive guidance on sustainable farming practices.</p>
+        <ul>
+          <li>Capture crop data with real-time quality metrics</li>
+          <li>Weather updates and real-time market insights</li>
+          <li>Access pest detection alerts to protect your crops</li>
+          <li>Smart Best Practice Videos for sustainable and high-yielding techniques</li>
+          <li>Blockchain-backed certificates for organic and premium products</li>
+          <li>Empower your farm, increase productivity, and connect directly with manufacturers and consumers through TraceVeda</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="stakeholder-item" id="manufacturer-detail">
+      <div class="stakeholder-visual">
+        <div class="stakeholder-image manufacturers"></div>
+      </div>
+      <div class="stakeholder-content">
+        <h3>Manufacturers</h3>
+        <p>Streamline your processing with TraceVeda's platform:</p>
+        <ul>
+          <li>Log processing steps • 100 herb experts manually via our blockchain</li>
+          <li>Automated compliance checks • 15,000+ products verified per day</li>
+          <li>Generate batch-level QR codes for full product provenance</li>
+          <li>All in one place • Ensure quality, transparency, and efficient operations</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="stakeholder-item" id="testing-detail">
+      <div class="stakeholder-visual">
+        <div class="stakeholder-image testing-labs"></div>
+      </div>
+      <div class="stakeholder-content">
+        <h3>Testing Laboratories</h3>
+        <p>Ensure reliable quality checks with TraceVeda's secure blockchain storage:</p>
+        <ul>
+          <li>Record lab test results (Moisture, Pesticide, ODA Barcode) directly on the blockchain</li>
+          <li>Automated quality validations with smart contracts</li>
+          <li>Reducing risk through transparency</li>
+          <li>Reporting for the Ayurveda supply chain</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="stakeholder-item" id="distributor-detail">
+      <div class="stakeholder-visual">
+        <div class="stakeholder-image distributors"></div>
+      </div>
+      <div class="stakeholder-content">
+        <h3>Distributors</h3>
+        <p>Efficiently manage herb distribution with TraceVeda:</p>
+        <ul>
+          <li>Real-time inventory management solution</li>
+          <li>Monitor real-time inventory and stock levels</li>
+          <li>Ensure hygienic chain of custody for every product</li>
+          <li>All in one platform • Simplifies tracking, improves supply chain transparency for all involved product</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="stakeholder-item" id="retailer-detail">
+      <div class="stakeholder-visual">
+        <div class="stakeholder-image retailers"></div>
+      </div>
+      <div class="stakeholder-content">
+        <h3>Retailers</h3>
+        <p>Offer verified Ayurvedic products with confidence using TraceVeda:</p>
+        <ul>
+          <li>Scan batch QR codes to verify product provenance and lab test results</li>
+          <li>Build customer loyalty with real-time stock status</li>
+          <li>Generate provenance reports for customer transparency</li>
+          <li>All in one solution • Builds consumer trust and amplifies product authenticity checks at point of sale</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="stakeholder-item" id="consumer-detail">
+      <div class="stakeholder-visual">
+        <div class="stakeholder-image consumers"></div>
+      </div>
+      <div class="stakeholder-content">
+        <h3>Consumers</h3>
+        <p>Buy Ayurvedic products with full confidence using TraceVeda:</p>
+        <ul>
+          <li>Verify products to instantly verify product origin, lab test results, and sustainability certifications</li>
+          <li>Access complete farm-to-shelf journey in seconds</li>
+          <li>Build trust with verified Ayurveda herbs</li>
+          <li>Empower your health and family with informed purchasing decisions</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Case Study Section -->
+  <section class="case-study">
+    <h2>Case Study</h2>
+    <div class="case-study-placeholder">
+      <div class="case-study-item">
+        <div>
+          <h3>Case Study 1</h3>
+          <p>Success Story Content</p>
+        </div>
+      </div>
+      <div class="case-study-item">
+        <div>
+          <h3>Case Study 2</h3>
+          <p>Implementation Results</p>
+        </div>
+      </div>
+      <div class="case-study-item">
+        <div>
+          <h3>Case Study 3</h3>
+          <p>Impact Analysis</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-container">
+      <div class="footer-main">
+        <div class="footer-text">
+          <p>We partner with visionary herbal entrepreneurs and sustainable agribusiness leaders.</p>
+          <p>Let's build a transparent, ethical, and trusted Ayurvedic supply chain together.</p>
+        </div>
+        <div class="footer-logo">T</div>
+      </div>
+      <div class="footer-bottom">
+        <div class="footer-contact">TraceVeda.com | 91+ 8959146865</div>
+        <div class="social-links">
+          <a href="#" class="social-link linkedin">in</a>
+          <a href="#" class="social-link whatsapp">W</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Smooth scroll function
+    function scrollToSection(sectionId) {
+      const element = document.getElementById(sectionId);
+      if (element) {
+        element.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start'
+        });
+        
+        // Add a highlight effect
+        element.style.transform = 'scale(1.02)';
+        element.style.transition = 'transform 0.3s ease';
+        
+        setTimeout(() => {
+          element.style.transform = 'scale(1)';
+        }, 500);
+      }
+    }
+  </script>
+
+</body>
+</html>

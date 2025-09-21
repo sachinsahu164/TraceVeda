@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Distributors - TraceVeda</title>
+  <style>
+    /* Basic Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      line-height: 1.6;
+      background-color: #f8f9fa;
+    }
+
+    /* Header & Navbar Styling */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background-color: #2c5530;
+      padding: 0;
+    }
+
+    nav {
+      background: #2c5530;
+      padding: 12px 0;
+      border-radius: 0;
+    }
+
+    .nav-container {
+      max-width: 100%;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 40px;
+    }
+
+    .logo-section {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo-circle {
+      width: 40px;
+      height: 40px;
+      background-color: #ffffff;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      font-weight: bold;
+      color: #2c5530;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 0;
+      margin: 0;
+    }
+
+    nav ul li {
+      margin: 0;
+    }
+
+    nav ul li a {
+      color: #ffffff;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 16px;
+      padding: 15px 25px;
+      display: block;
+      transition: all 0.3s ease;
+      border-radius: 0;
+    }
+
+    nav ul li a:hover {
+      background-color: rgba(255,255,255,0.1);
+      color: #ffffff;
+    }
+
+    nav ul li a.active {
+      background-color: rgba(255,255,255,0.2);
+    }
+
+    /* Banner Section */
+    .banner {
+      background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=1200&h=400&fit=crop') no-repeat center center/cover;
+      height: 400px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      text-align: center;
+      position: relative;
+    }
+
+    .banner-content h1 {
+      font-size: 3rem;
+      font-weight: bold;
+      margin-bottom: 15px;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+    }
+
+    .banner-content p {
+      font-size: 1.3rem;
+      font-weight: 600;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+    }
+
+    /* Stats Cards Section */
+    .stats-section {
+      padding: 50px 40px;
+      max-width: 100%;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 30px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .stat-card {
+      background: white;
+      padding: 30px 20px;
+      border-radius: 15px;
+      text-align: center;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      transition: all 0.3s ease;
+    }
+
+    .stat-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+    }
+
+    .stat-number {
+      font-size: 2.5rem;
+      font-weight: bold;
+      color: #2c5530;
+      margin-bottom: 10px;
+    }
+
+    .stat-label {
+      font-size: 1rem;
+      font-weight: 600;
+      color: #666;
+      margin-bottom: 5px;
+    }
+
+    .stat-description {
+      font-size: 0.85rem;
+      color: #999;
+    }
+
+    /* Filters Section */
+    .filters-section {
+      background: white;
+      padding: 30px 40px;
+      margin: 0 40px 30px;
+      border-radius: 15px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+    .filters-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr auto;
+      gap: 20px;
+      align-items: center;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .search-input {
+      padding: 12px 20px;
+      border: 2px solid #e0e0e0;
+      border-radius: 25px;
+      font-size: 16px;
+      font-weight: 500;
+      outline: none;
+      transition: all 0.3s ease;
+    }
+
+    .search-input:focus {
+      border-color: #2c5530;
+      box-shadow: 0 0 0 3px rgba(44,85,48,0.1);
+    }
+
+    .filter-select {
+      padding: 12px 20px;
+      border: 2px solid #e0e0e0;
+      border-radius: 25px;
+      font-size: 16px;
+      font-weight: 500;
+      outline: none;
+      background-color: white;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .filter-select:focus {
+      border-color: #2c5530;
+    }
+
+    .clear-filter-btn {
+      background-color: #dc3545;
+      color: white;
+      border: none;
+      padding: 12px 25px;
+      border-radius: 25px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .clear-filter-btn:hover {
+      background-color: #c82333;
+      transform: translateY(-2px);
+    }
+
+    /* Table Section */
+    .table-section {
+      padding: 0 40px 50px;
+    }
+
+    .table-container {
+      background: white;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      max-width: 100%;
+      margin: 0 auto;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 15px;
+    }
+
+    th {
+      background-color: #2c5530;
+      color: white;
+      padding: 20px 15px;
+      text-align: center;
+      font-weight: bold;
+      font-size: 16px;
+    }
+
+    td {
+      padding: 15px;
+      text-align: center;
+      border-bottom: 1px solid #eee;
+      font-weight: 500;
+    }
+
+    tr:hover {
+      background-color: #f8f9fa;
+      cursor: pointer;
+    }
+
+    .status-active {
+      background-color: #28a745;
+      color: white;
+      padding: 6px 15px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: bold;
+    }
+
+    .status-inactive {
+      background-color: #dc3545;
+      color: white;
+      padding: 6px 15px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: bold;
+    }
+
+    .status-suspended {
+      background-color: #ffc107;
+      color: black;
+      padding: 6px 15px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: bold;
+    }
+
+    .action-btn {
+      background-color: #007bff;
+      color: white;
+      border: none;
+      padding: 8px 15px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 12px;
+      font-weight: 600;
+      margin: 0 3px;
+      transition: all 0.3s ease;
+    }
+
+    .action-btn:hover {
+      background-color: #0056b3;
+      transform: translateY(-1px);
+    }
+
+    .block-btn {
+      background-color: #dc3545;
+    }
+
+    .block-btn:hover {
+      background-color: #c82333;
+    }
+
+    /* Modal Styles */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 10000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.5);
+    }
+
+    .modal-content {
+      background-color: white;
+      margin: 5% auto;
+      padding: 30px;
+      border-radius: 15px;
+      width: 80%;
+      max-width: 600px;
+      position: relative;
+    }
+
+    .close {
+      color: #aaa;
+      float: right;
+      font-size: 28px;
+      font-weight: bold;
+      cursor: pointer;
+      position: absolute;
+      right: 20px;
+      top: 15px;
+    }
+
+    .close:hover {
+      color: black;
+    }
+
+    .modal h2 {
+      color: #2c5530;
+      margin-bottom: 20px;
+      font-weight: bold;
+    }
+
+    .detail-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+
+    .detail-item {
+      padding: 10px 0;
+      border-bottom: 1px solid #eee;
+    }
+
+    .detail-label {
+      font-weight: bold;
+      color: #333;
+      margin-bottom: 5px;
+    }
+
+    .detail-value {
+      color: #666;
+      font-weight: 500;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .nav-container {
+        flex-direction: column;
+        gap: 15px;
+        padding: 0 20px;
+      }
+
+      nav ul {
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      nav ul li a {
+        padding: 10px 15px;
+        font-size: 14px;
+      }
+
+      .banner-content h1 {
+        font-size: 2rem;
+      }
+
+      .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+      }
+
+      .filters-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+      }
+
+      .table-container {
+        overflow-x: auto;
+      }
+
+      .filters-section,
+      .table-section,
+      .stats-section {
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header & Navbar -->
+  <header>
+    <nav>
+      <div class="nav-container">
+        <div class="logo-section">
+          <div class="logo-circle">T</div>
+        </div>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="farmer.html">Farmers</a></li>
+          <li><a href="laboratory.html">Labs</a></li>
+          <li><a href="manufacturer.html">Manufacturers</a></li>
+          <li><a href="distributor.html" class="active">Distributors</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="login.html">Login</a></li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Banner Section -->
+  <section class="banner">
+    <div class="banner-content">
+      <h1>Distribution Network Hub</h1>
+      <p>Connecting Manufacturers to Retailers with Seamless Supply Chain Management</p>
+    </div>
+  </section>
+
+  <!-- Stats Cards Section -->
+  <section class="stats-section">
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-number">342</div>
+        <div class="stat-label">Active Distributors</div>
+        <div class="stat-description">Pan-India network</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">8,934</div>
+        <div class="stat-label">Orders Dispatched</div>
+        <div class="stat-description">This month</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">1,247</div>
+        <div class="stat-label">Pending Deliveries</div>
+        <div class="stat-description">In transit</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">96%</div>
+        <div class="stat-label">On-Time Delivery</div>
+        <div class="stat-description">Performance rate</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Filters Section -->
+  <section class="filters-section">
+    <div class="filters-grid">
+      <input type="text" class="search-input" id="searchInput" placeholder="Search by Distributor Name or ID...">
+      
+      <select class="filter-select" id="stateFilter">
+        <option value="">All States</option>
+        <option value="Madhya Pradesh">Madhya Pradesh</option>
+        <option value="Maharashtra">Maharashtra</option>
+        <option value="Gujarat">Gujarat</option>
+        <option value="Rajasthan">Rajasthan</option>
+        <option value="Punjab">Punjab</option>
+        <option value="Haryana">Haryana</option>
+        <option value="Uttar Pradesh">Uttar Pradesh</option>
+        <option value="Karnataka">Karnataka</option>
+        <option value="Andhra Pradesh">Andhra Pradesh</option>
+        <option value="Kerala">Kerala</option>
+        <option value="Tamil Nadu">Tamil Nadu</option>
+        <option value="West Bengal">West Bengal</option>
+      </select>
+      
+      <select class="filter-select" id="statusFilter">
+        <option value="">All Status</option>
+        <option value="Active">Active</option>
+        <option value="Inactive">Inactive</option>
+        <option value="Suspended">Suspended</option>
+      </select>
+      
+      <button class="clear-filter-btn" onclick="clearFilters()">Clear Filters</button>
+    </div>
+  </section>
+
+  <!-- Table Section -->
+  <section class="table-section">
+    <div class="table-container">
+      <table id="distributorsTable">
+        <thead>
+          <tr>
+            <th>Distributor ID</th>
+            <th>Name</th>
+            <th>State</th>
+            <th>Contact Info</th>
+            <th>Last Dispatch Date</th>
+            <th>Batches Handled</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody id="distributorsTableBody">
+          <!-- Dynamic content will be loaded here -->
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- Modal for Distributor Details -->
+  <div id="distributorModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h2 id="modalTitle">Distributor Details</h2>
+      <div class="detail-grid" id="distributorDetails">
+        <!-- Details will be populated here -->
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Dummy data for distributors (50+ entries)
+    const distributorsData = [
+      { id: 'DST001', name: 'Ayurvedic Distribution Co', state: 'Maharashtra', contactInfo: '+91 9876543210', lastDispatchDate: '2025-09-20', batchesHandled: 145, status: 'Active', address: 'Mumbai Distribution Center', established: '2018', warehouseCapacity: '5000 sq ft', serviceAreas: 'Mumbai, Pune, Nashik' },
+      { id: 'DST002', name: 'Herbal Supply Chain', state: 'Gujarat', contactInfo: '+91 8765432109', lastDispatchDate: '2025-09-19', batchesHandled: 234, status: 'Active', address: 'Ahmedabad Logistics Hub', established: '2019', warehouseCapacity: '7500 sq ft', serviceAreas: 'Ahmedabad, Surat, Vadodara' },
+      { id: 'DST003', name: 'Natural Products Distributors', state: 'Kerala', contactInfo: '+91 7654321098', lastDispatchDate: '2025-09-18', batchesHandled: 187, status: 'Active', address: 'Kochi Distribution Hub', established: '2017', warehouseCapacity: '4500 sq ft', serviceAreas: 'Kochi, Trivandrum, Calicut' },
+      { id: 'DST004', name: 'Wellness Distribution Network', state: 'Karnataka', contactInfo: '+91 6543210987', lastDispatchDate: '2025-09-17', batchesHandled: 156, status: 'Active', address: 'Bangalore Logistics Center', established: '2020', warehouseCapacity: '6000 sq ft', serviceAreas: 'Bangalore, Mysore, Mangalore' },
+      { id: 'DST005', name: 'Organic Supply Solutions', state: 'Tamil Nadu', contactInfo: '+91 5432109876', lastDispatchDate: '2025-09-16', batchesHandled: 198, status: 'Inactive', address: 'Chennai Distribution Point', established: '2018', warehouseCapacity: '5500 sq ft', serviceAreas: 'Chennai, Coimbatore, Madurai' },
+      { id: 'DST006', name: 'Herbal Logistics Ltd', state: 'Rajasthan', contactInfo: '+91 4321098765', lastDispatchDate: '2025-09-15', batchesHandled: 167, status: 'Active', address: 'Jaipur Supply Center', established: '2019', warehouseCapacity: '4000 sq ft', serviceAreas: 'Jaipur, Jodhpur, Udaipur' },
+      { id: 'DST007', name: 'Ayush Distribution Hub', state: 'Punjab', contactInfo: '+91 3210987654', lastDispatchDate: '2025-09-14', batchesHandled: 223, status: 'Active', address: 'Ludhiana Logistics Hub', established: '2016', warehouseCapacity: '8000 sq ft', serviceAreas: 'Ludhiana, Amritsar, Jalandhar' },
+      { id: 'DST008', name: 'Pure Herbs Distributors', state: 'Uttar Pradesh', contactInfo: '+91 2109876543', lastDispatchDate: '2025-09-13', batchesHandled: 178, status: 'Active', address: 'Noida Distribution Center', established: '2020', warehouseCapacity: '6500 sq ft', serviceAreas: 'Delhi NCR, Lucknow, Kanpur' },
+      { id: 'DST009', name: 'Bio Supply Chain', state: 'Madhya Pradesh', contactInfo: '+91 1098765432', lastDispatchDate: '2025-09-12', batchesHandled: 189, status: 'Suspended', address: 'Bhopal Logistics Center', established: '2018', warehouseCapacity: '5000 sq ft', serviceAreas: 'Bhopal, Indore, Gwalior' },
+      { id: 'DST010', name: 'Natural Distribution Network', state: 'Haryana', contactInfo: '+91 9876543210', lastDispatchDate: '2025-09-11', batchesHandled: 145, status: 'Active', address: 'Gurgaon Supply Hub', established: '2019', warehouseCapacity: '7000 sq ft', serviceAreas: 'Gurgaon, Faridabad, Panipat' },
+      { id: 'DST011', name: 'Vedic Supply Solutions', state: 'Andhra Pradesh', contactInfo: '+91 8765432109', lastDispatchDate: '2025-09-10', batchesHandled: 167, status: 'Active', address: 'Hyderabad Distribution Hub', established: '2017', warehouseCapacity: '5500 sq ft', serviceAreas: 'Hyderabad, Visakhapatnam, Vijayawada' },
+      { id: 'DST012', name: 'Herbal Express Logistics', state: 'West Bengal', contactInfo: '+91 7654321098', lastDispatchDate: '2025-09-09', batchesHandled: 234, status: 'Active', address: 'Kolkata Distribution Center', established: '2020', warehouseCapacity: '6000 sq ft', serviceAreas: 'Kolkata, Howrah, Durgapur' },
+      { id: 'DST013', name: 'Ayurvedic Logistics Co', state: 'Maharashtra', contactInfo: '+91 6543210987', lastDispatchDate: '2025-09-08', batchesHandled: 156, status: 'Active', address: 'Pune Supply Chain Hub', established: '2018', warehouseCapacity: '4500 sq ft', serviceAreas: 'Pune, Aurangabad, Solapur' },
+      { id: 'DST014', name: 'Organic Distribution Ltd', state: 'Gujarat', contactInfo: '+91 5432109876', lastDispatchDate: '2025-09-07', batchesHandled: 198, status: 'Active', address: 'Surat Logistics Point', established: '2019', warehouseCapacity: '5000 sq ft', serviceAreas: 'Surat, Rajkot, Bhavnagar' },
+      { id: 'DST015', name: 'Wellness Supply Chain', state: 'Kerala', contactInfo: '+91 4321098765', lastDispatchDate: '2025-09-06', batchesHandled: 167, status: 'Inactive', address: 'Trivandrum Distribution Hub', established: '2017', warehouseCapacity: '4000 sq ft', serviceAreas: 'Trivandrum, Kollam, Alappuzha' },
+      { id: 'DST016', name: 'Natural Health Distributors', state: 'Karnataka', contactInfo: '+91 3210987654', lastDispatchDate: '2025-09-05', batchesHandled: 189, status: 'Active', address: 'Mysore Supply Center', established: '2020', warehouseCapacity: '5500 sq ft', serviceAreas: 'Mysore, Hubli, Belgaum' },
+      { id: 'DST017', name: 'Herbal Network Solutions', state: 'Tamil Nadu', contactInfo: '+91 2109876543', lastDispatchDate: '2025-09-04', batchesHandled: 178, status: 'Active', address: 'Coimbatore Distribution Point', established: '2018', warehouseCapacity: '6000 sq ft', serviceAreas: 'Coimbatore, Salem, Erode' },
+      { id: 'DST018', name: 'Ayush Logistics Hub', state: 'Rajasthan', contactInfo: '+91 1098765432', lastDispatchDate: '2025-09-03', batchesHandled: 145, status: 'Active', address: 'Jodhpur Supply Hub', established: '2019', warehouseCapacity: '4500 sq ft', serviceAreas: 'Jodhpur, Bikaner, Jaisalmer' },
+      { id: 'DST019', name: 'Pure Distribution Co', state: 'Punjab', contactInfo: '+91 9876543210', lastDispatchDate: '2025-09-02', batchesHandled: 223, status: 'Active', address: 'Amritsar Logistics Center', established: '2016', warehouseCapacity: '7500 sq ft', serviceAreas: 'Amritsar, Patiala, Bathinda' },
+      { id: 'DST020', name: 'Bio Herbal Supply', state: 'Uttar Pradesh', contactInfo: '+91 8765432109', lastDispatchDate: '2025-09-01', batchesHandled: 167, status: 'Suspended', address: 'Lucknow Distribution Hub', established: '2020', warehouseCapacity: '5000 sq ft', serviceAreas: 'Lucknow, Varanasi, Allahabad' },
+      { id: 'DST021', name: 'Natural Supply Network', state: 'Madhya Pradesh', contactInfo: '+91 7654321098', lastDispatchDate: '2025-08-31', batchesHandled: 189, status: 'Active', address: 'Indore Supply Center', established: '2018', warehouseCapacity: '6000 sq ft', serviceAreas: 'Indore, Ujjain, Dewas' },
+      { id: 'DST022', name: 'Wellness Logistics Ltd', state: 'Haryana', contactInfo: '+91 6543210987', lastDispatchDate: '2025-08-30', batchesHandled: 156, status: 'Active', address: 'Faridabad Distribution Point', established: '2019', warehouseCapacity: '5500 sq ft', serviceAreas: 'Faridabad, Rohtak, Hisar' },
+      { id: 'DST023', name: 'Herbal Express Co', state: 'Andhra Pradesh', contactInfo: '+91 5432109876', lastDispatchDate: '2025-08-29', batchesHandled: 198, status: 'Active', address: 'Vijayawada Logistics Hub', established: '2017', warehouseCapacity: '4500 sq ft', serviceAreas: 'Vijayawada, Guntur, Nellore' },
+      { id: 'DST024', name: 'Organic Logistics Solutions', state: 'West Bengal', contactInfo: '+91 4321098765', lastDispatchDate: '2025-08-28', batchesHandled: 178, status: 'Active', address: 'Durgapur Supply Hub', established: '2020', warehouseCapacity: '5000 sq ft', serviceAreas: 'Durgapur, Asansol, Siliguri' },
+      { id: 'DST025', name: 'Ayurvedic Express Network', state: 'Maharashtra', contactInfo: '+91 3210987654', lastDispatchDate: '2025-08-27', batchesHandled: 145, status: 'Inactive', address: 'Nagpur Distribution Center', established: '2018', warehouseCapacity: '4000 sq ft', serviceAreas: 'Nagpur, Akola, Amravati' }
+    ];
+
+    let filteredData = [...distributorsData];
+
+    // Load table data
+    function loadTableData(data = distributorsData) {
+      const tbody = document.getElementById('distributorsTableBody');
+      tbody.innerHTML = '';
+
+      data.forEach(distributor => {
+        const row = document.createElement('tr');
+        
+        row.innerHTML = `
+          <td><strong>${distributor.id}</strong></td>
+          <td><strong>${distributor.name}</strong></td>
+          <td><strong>${distributor.state}</strong></td>
+          <td><strong>${distributor.contactInfo}</strong></td>
+          <td><strong>${distributor.lastDispatchDate}</strong></td>
+          <td><strong>${distributor.batchesHandled}</strong></td>
+          <td><span class="status-${distributor.status.toLowerCase()}"><strong>${distributor.status}</strong></span></td>
+          <td>
+            <button class="action-btn" onclick="viewDistributor('${distributor.id}')"><strong>View</strong></button>
+            <button class="action-btn block-btn" onclick="blockDistributor('${distributor.id}')"><strong>Block</strong></button>
+          </td>
+        `;
+        row.onclick = () => viewDistributor(distributor.id);
+        tbody.appendChild(row);
+      });
+
+      filteredData = data;
+    }
+
+    // Search functionality
+    document.getElementById('searchInput').addEventListener('input', function() {
+      const searchTerm = this.value.toLowerCase();
+      const stateFilter = document.getElementById('stateFilter').value;
+      const statusFilter = document.getElementById('statusFilter').value;
+      
+      filterData(searchTerm, stateFilter, statusFilter);
+    });
+
+    // State filter
+    document.getElementById('stateFilter').addEventListener('change', function() {
+      const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+      const stateFilter = this.value;
+      const statusFilter = document.getElementById('statusFilter').value;
+      
+      filterData(searchTerm, stateFilter, statusFilter);
+    });
+
+    // Status filter
+    document.getElementById('statusFilter').addEventListener('change', function() {
+      const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+      const stateFilter = document.getElementById('stateFilter').value;
+      const statusFilter = this.value;
+      
+      filterData(searchTerm, stateFilter, statusFilter);
+    });
+
+    // Filter function (SINGLE - remove duplicate)
+    function filterData(search, state, status) {
+      let filtered = distributorsData.filter(distributor => {
+        const matchesSearch = distributor.name.toLowerCase().includes(search) || 
+                            distributor.id.toLowerCase().includes(search);
+        const matchesState = !state || distributor.state === state;
+        const matchesStatus = !status || distributor.status === status;
+        
+        return matchesSearch && matchesState && matchesStatus;
+      });
+      
+      loadTableData(filtered);
+    }
+
+    // Clear filters
+    function clearFilters() {
+      document.getElementById('searchInput').value = '';
+      document.getElementById('stateFilter').value = '';
+      document.getElementById('statusFilter').value = '';
+      loadTableData(distributorsData);
+    }
+
+    // View distributor details
+    function viewDistributor(distributorId) {
+      const distributor = distributorsData.find(d => d.id === distributorId);
+      if (distributor) {
+        document.getElementById('modalTitle').textContent = `${distributor.name} - ${distributor.id}`;
+        
+        const detailsHtml = `
+          <div class="detail-item">
+            <div class="detail-label">Distributor ID:</div>
+            <div class="detail-value"><strong>${distributor.id}</strong></div>
+          </div>
+          <div class="detail-item">
+            <div class="detail-label">Company Name:</div>
+            <div class="detail-value"><strong>${distributor.name}</strong></div>
+          </div>
+          <div class="detail-item">
+            <div class="detail-label">State:</div>
+            <div class="detail-value"><strong>${distributor.state}</strong></div>
+          </div>
+          <div class="detail-item">
+            <div class="detail-label">Contact Info:</div>
+            <div class="detail-value"><strong>${distributor.contactInfo}</strong></div>
+          </div>
+          <div class="detail-item">
+            <div class="detail-label">Address:</div>
+            <div class="detail-value"><strong>${distributor.address}</strong></div>
+          </div>
+          <div class="detail-item">
+            <div class="detail-label">Established:</div>
+            <div class="detail-value"><strong>${distributor.established}</strong></div>
+          </div>
+          <div class="detail-item">
+            <div class="detail-label">Warehouse Capacity:</div>
+            <div class="detail-value"><strong>${distributor.warehouseCapacity}</strong></div>
+          </div>
+          <div class="detail-item">
+            <div class="detail-label">Service Areas:</div>
+            <div class="detail-value"><strong>${distributor.serviceAreas}</strong></div>
+          </div>
+          <div class="detail-item">
+            <div class="detail-label">Last Dispatch Date:</div>
+            <div class="detail-value"><strong>${distributor.lastDispatchDate}</strong></div>
+          </div>
+          <div class="detail-item">
+            <div class="detail-label">Batches Handled:</div>
+            <div class="detail-value"><strong>${distributor.batchesHandled}</strong></div>
+          </div>
+          <div class="detail-item">
+            <div class="detail-label">Status:</div>
+            <div class="detail-value"><span class="status-${distributor.status.toLowerCase()}"><strong>${distributor.status}</strong></span></div>
+          </div>
+        `;
+        
+        document.getElementById('distributorDetails').innerHTML = detailsHtml;
+        document.getElementById('distributorModal').style.display = 'block';
+      }
+    }
+
+    // Block distributor
+    function blockDistributor(distributorId) {
+      if (confirm(`Are you sure you want to block distributor ${distributorId}?`)) {
+        alert(`Distributor ${distributorId} has been blocked successfully.`);
+      }
+    }
+
+    // Modal close functionality
+    document.querySelector('.close').onclick = function() {
+      document.getElementById('distributorModal').style.display = 'none';
+    }
+
+    window.onclick = function(event) {
+      const modal = document.getElementById('distributorModal');
+      if (event.target == modal) {
+        modal.style.display = 'none';
+      }
+    }
+
+    // Initialize page
+    document.addEventListener('DOMContentLoaded', function() {
+      loadTableData(distributorsData);
+    });
+</script>
